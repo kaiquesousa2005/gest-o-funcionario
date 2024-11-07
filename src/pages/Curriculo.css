@@ -1,18 +1,18 @@
-/* Reset e estilos base */
+
 .curriculo-wrapper {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Container principal */
+
 .resume-container {
   max-width: 48rem;
   margin: 2rem auto;
   padding: 1rem;
 }
 
-/* Card do currículo */
+
 .resume-card {
   background-color: white;
   border: 1px solid #e5e7eb;
@@ -22,14 +22,14 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Cabeçalho do currículo */
+
 .resume-header {
   padding: 1.5rem;
   border-bottom: 1px solid #e5e7eb;
   cursor: pointer;
 }
 
-/* Nome do usuário */
+
 .resume-name {
   font-size: 1.5rem;
   font-weight: 600;
@@ -37,7 +37,7 @@
   margin-bottom: 0.5rem;
 }
 
-/* Descrição/Bio */
+
 .resume-bio {
   color: #6B7280;
   font-size: 0.875rem;
@@ -45,16 +45,16 @@
   margin-bottom: 1rem;
 }
 
-/* Seções do currículo */
+
 .resume-section {
-  background-color: #f9f9f9; /* Cor de fundo atualizada */
-  border-radius: 8px;        /* Bordas arredondadas */
+  background-color: #f9f9f9; 
+  border-radius: 8px;        
   padding: 1rem;
-  border-left: none;         /* Remove a borda esquerda */
+  border-left: none;        
   margin-bottom: 1rem;
 }
 
-/* Conteúdo expandido e informações adicionais */
+
 .resume-expanded-content {
   padding: 1rem;
 }
@@ -72,7 +72,6 @@
   margin-bottom: 1rem;
 }
 
-/* Grid de informações */
 .info-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -97,12 +96,11 @@
   font-weight: 500;
 }
 
-/* Seções de informações específicas */
+
 .employee-info, .contact-info {
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra adicionada */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Botões de ação */
 .action-buttons {
   display: flex;
   gap: 0.75rem;
@@ -110,7 +108,6 @@
   border-top: 1px solid #e5e7eb;
 }
 
-/* Ícone de expansão */
 .expand-icon {
   display: flex;
   justify-content: center;
@@ -141,7 +138,7 @@
   background-color: rgba(0, 0, 0, 0.04);
 }
 
-/* Dialog de edição */
+
 .edit-dialog {
   padding: 1.5rem;
 }
@@ -159,7 +156,7 @@
   gap: 1rem;
 }
 
-/* Campos de formulário */
+
 .form-field {
   margin-bottom: 1rem;
 }
@@ -179,7 +176,7 @@
   font-size: 0.875rem;
 }
 
-/* Responsividade */
+
 @media (max-width: 640px) {
   .info-grid {
     grid-template-columns: 1fr;
@@ -190,7 +187,7 @@
   }
 }
 
-/* Animações */
+
 .transition-transform {
   transition: transform 0.2s ease-in-out;
 }
@@ -199,7 +196,6 @@
   transform: rotate(180deg);
 }
 
-/* Utilitários */
 .cursor-pointer {
   cursor: pointer;
 }
@@ -215,7 +211,7 @@
   min-height: 200px;
 }
 
-/* Material UI customizações */
+
 .MuiButton-root {
   text-transform: none !important;
 }
@@ -228,7 +224,7 @@
   background-color: #3451B2 !important;
 }
 
-/* PDF Download Link */
+
 .pdf-link {
   text-decoration: none;
 }

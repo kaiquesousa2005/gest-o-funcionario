@@ -23,7 +23,7 @@
   margin-bottom: 20px;
 }
 
-/* Estilos para o formulário */
+
 form {
   display: flex;
   flex-direction: column;
@@ -63,7 +63,7 @@ button[type="submit"]:hover {
   background-color: #1565c0;
 }
 
-/* Estilo para o botão de login do Google */
+
 .google-login-button {
   display: flex;
   align-items: center;
@@ -95,7 +95,7 @@ button[type="submit"]:hover {
 }
 
 .error-message {
-  color: #d32f2f; /* Cor vermelha para erro */
+  color: #d32f2f; 
   font-size: 1rem;
   margin-bottom: 15px;
   text-align: center;

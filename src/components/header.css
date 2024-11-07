@@ -4,9 +4,9 @@
 }
 
 .container {
-    max-width: 1280px; /* Ajuste conforme necessário */
+    max-width: 1280px; 
     margin: 0 auto;
-    padding: 1rem 2rem; /* Ajuste conforme necessário */
+    padding: 1rem 2rem; 
 }
 
 .flex-container {
@@ -18,11 +18,11 @@
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 2rem; /* Espaçamento entre o logo e o título */
+    gap: 2rem; 
 }
 
 .logo {
-    height: 60px; /* Ajuste conforme necessário */
+    height: 60px; 
     width: auto;
 
 }
@@ -33,26 +33,28 @@
 }
 
 .step-text {
-    font-size: 0.75rem; /* Tamanho do texto do passo */
-    color: #6c757d; /* Cor do texto do passo */
+    font-size: 0.75rem; 
+    color: #6c757d; 
 }
 
 .title {
-    font-size: 1rem; /* Tamanho do título */
-    font-weight: 500; /* Peso da fonte */
+    font-size: 1rem; 
+    font-weight: 500; 
 }
 
 .home-button {
-    padding: 0.5rem; /* Espaçamento do botão */
-    color: #6c757d; /* Cor padrão do ícone */
-    transition: color 0.2s; /* Transição suave para mudança de cor */
+    padding: 0.5rem; 
+    color: #6c757d; 
+    transition: color 0.2s; 
 }
 
 .home-button:hover {
-    color: #0088cc; /* Cor ao passar o mouse */
+    color: #0088cc; 
 }
 
 .home-icon {
-    height: 1.25rem; /* Tamanho do ícone */
-    width: 1.25rem; /* Tamanho do ícone */
+    height: 1.25rem; 
+    width: 1.25rem; 
 }
+
+

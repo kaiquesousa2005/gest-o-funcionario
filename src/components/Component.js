@@ -13,7 +13,7 @@ export default function Component() {
   const [bio, setBio] = useState('');
   const [formErrors, setFormErrors] = useState({});
   const [file, setFile] = useState(null);
-  const navigate = useNavigate(); // Inicializa o hook de navegação
+  const navigate = useNavigate(); 
 
 
   const handlePhotoUpload = async (e) => {
@@ -71,7 +71,6 @@ export default function Component() {
         });
 
         console.log('Dados salvos com sucesso!');
-        // Reset form or show success message here
       } catch (error) {
         console.error("Erro ao salvar dados: ", error);
         setFormErrors((prev) => ({ ...prev, submit: error.message }));
@@ -89,8 +88,8 @@ export default function Component() {
             <input
               id="bio"
               placeholder=" "
-              value={bio} // Adiciona o valor do estado
-              onChange={(e) => setBio(e.target.value)} // Atualiza o estado
+              value={bio} 
+              onChange={(e) => setBio(e.target.value)} 
             />
             <label htmlFor="bio">Diga quem você é</label>
           </div>
@@ -182,9 +181,9 @@ export default function Component() {
             <div className="input-group">
               <div className="label-wrapper">
                 <input
-                  type="date" // Alterado para o tipo 'date'
+                  type="date" 
                   value={birthDate}
-                  onChange={(e) => setBirthDate(e.target.value)} // Atualiza o estado diretamente
+                  onChange={(e) => setBirthDate(e.target.value)} 
                   className="date-input"
                   required
                 />
@@ -234,9 +233,9 @@ export default function Component() {
             <div className="input-group">
               <div className="label-wrapper">
                 <input
-                  type="date" // Alterado para o tipo 'date'
+                  type="date" 
                   value={admissionDate}
-                  onChange={(e) => setAdmissionDate(e.target.value)} // Atualiza o estado diretamente
+                  onChange={(e) => setAdmissionDate(e.target.value)} 
                   className="date-input"
                   required
                 />
@@ -247,7 +246,7 @@ export default function Component() {
           </div>
 
           <div className="action">
-            <button type="submit" className="cadastro-btn">Cadastrar Funcionário</button> {/* Mudança aqui para 'submit' */}
+            <button type="submit" className="cadastro-btn">Cadastrar Funcionário</button> 
             <Button
               variant="contained"
               onClick={() => navigate('/curriculo')}

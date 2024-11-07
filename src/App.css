@@ -1,8 +1,8 @@
 .header {
-  width: 100%; /* Mantém o cabeçalho em 100% da largura */
+  width: 100%; 
 }
 
 .formulario {
-  max-width: 900px; /* Mantém o formulário em uma largura específica */
-  margin: 0 auto; /* Centraliza o formulário */
+  max-width: 900px; 
+  margin: 0 auto; 
 }

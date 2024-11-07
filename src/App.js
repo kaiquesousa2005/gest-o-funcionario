@@ -15,13 +15,12 @@ function App() {
       <Router>
         <Header className="header" />
         <Routes>
-          {/* Rota de Login */}
+
           <Route path="/" element={<Login />} />
 
-          {/* Rota de Cadastro */}
-          <Route path="/signup" element={<Signup />} /> {/* Nova rota de cadastro */}
 
-          {/* Rota principal "/" protegida */}
+          <Route path="/signup" element={<Signup />} /> 
+
           <Route
             path="/formulario"
             element={
@@ -31,7 +30,6 @@ function App() {
             }
           />
 
-          {/* Nova rota para o currículo */}
           <Route
             path="/curriculo"
             element={

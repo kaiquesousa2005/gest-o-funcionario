@@ -1,6 +1,6 @@
-import { db, storage } from '../firebaseConfig'; // Corrigir a importação para o caminho correto
-import { auth } from '../firebaseConfig'; // Importe a instância de autenticação
-import { doc, setDoc, getDoc } from 'firebase/firestore'; // Adicionar a importação de getDoc
+import { db, storage } from '../firebaseConfig'; 
+import { auth } from '../firebaseConfig'; 
+import { doc, setDoc, getDoc } from 'firebase/firestore'; 
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 
@@ -37,7 +37,7 @@ export const saveDataToFirestore = async (data) => {
 
   try {
     // Salva os dados no Firestore no documento com o ID do usuário
-    await setDoc(doc(db, 'users', userId), data); // Isso substitui qualquer documento existente
+    await setDoc(doc(db, 'users', userId), data); 
     console.log('Dados salvos com sucesso!');
   } catch (error) {
     console.error('Erro ao salvar dados:', error);

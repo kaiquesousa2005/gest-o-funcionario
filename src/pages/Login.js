@@ -30,7 +30,7 @@ const Login = () => {
 
   const handleEmailLogin = async (e) => {
     e.preventDefault();
-    setError(''); // Limpa o erro antes de tentar novamente
+    setError('');
 
     if (!email || !password) {
       setError('Por favor, preencha todos os campos.');
@@ -42,7 +42,7 @@ const Login = () => {
       navigate('/formulario');
     } catch (error) {
       console.error('Erro ao fazer login com email e senha:', error);
-      // Verifica o erro de login e fornece a mensagem adequada ao usuário
+
       if (error.code === 'auth/user-not-found') {
         setError('Usuário não encontrado. Por favor, faça o cadastro.');
       } else if (error.code === 'auth/wrong-password') {
@@ -58,10 +58,10 @@ const Login = () => {
       <div className="login-box">
         <h1 className="login-title">Acessar</h1>
 
-        {/* Exibe a mensagem de erro, se houver */}
+
         {error && <p className="error-message">{error}</p>}
 
-        {/* Formulário de login com e-mail e senha */}
+
         <form onSubmit={handleEmailLogin}>
           <input
             type="email"
@@ -82,7 +82,7 @@ const Login = () => {
           </button>
         </form>
 
-        {/* Botão de login com Google */}
+
         <button
           className="google-login-button"
           onClick={handleGoogleLogin}
@@ -96,7 +96,7 @@ const Login = () => {
           {isLoggingIn ? 'Conectando...' : 'Entrar com o Google'}
         </button>
 
-        {/* Link para a tela de cadastro */}
+
         <p className="register-link">
           Ainda não tem uma conta?{' '}
           <span onClick={() => navigate('/signup')} className="register-text">

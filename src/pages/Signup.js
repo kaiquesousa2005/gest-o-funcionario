@@ -1,9 +1,9 @@
-// src/pages/Signup.js
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebaseConfig';
 import { createUserWithEmailAndPassword, fetchSignInMethodsForEmail } from 'firebase/auth';
-import { saveDataToFirestore } from '../components/FirestoreStorage'; // Função para salvar dados adicionais
+import { saveDataToFirestore } from '../components/FirestoreStorage';
 import './Signup.css';
 
 const Signup = () => {
@@ -16,9 +16,9 @@ const Signup = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    setError(''); // Limpa erros anteriores
+    setError(''); 
 
-    // Verifica se as senhas são iguais
+
     if (password !== confirmPassword) {
       setError('As senhas não coincidem.');
       return;
@@ -27,30 +27,27 @@ const Signup = () => {
     setIsSigningUp(true);
 
     try {
-      // Verifica se o e-mail já está em uso
+
       const methods = await fetchSignInMethodsForEmail(auth, email);
       
       if (methods.length > 0) {
-        // Se o e-mail já está em uso, exibe erro
+
         setError('Este e-mail já está registrado. Tente outro.');
         setIsSigningUp(false);
         return;
       }
 
-      // Cria o usuário
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       
-      // Dados adicionais para salvar no Firestore
       const userData = {
         email: user.email,
         createdAt: new Date(),
       };
 
-      // Salva os dados do usuário no Firestore
       await saveDataToFirestore(userData);
       
-      navigate('/'); // Redireciona para a página principal após o cadastro
+      navigate('/');
     } catch (error) {
       console.error("Erro ao criar usuário: ", error);
       setError('Erro ao criar conta. Tente novamente.');

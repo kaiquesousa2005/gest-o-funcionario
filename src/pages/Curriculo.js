@@ -212,7 +212,6 @@ export default function ResumeLayout() {
             <Button onClick={handleSave}>Salvar</Button>
           </DialogActions>
         </Dialog>
-      {/* Botão de voltar para a página principal */}
       <Button
   variant="text"
   onClick={() => navigate('/formulario')}
