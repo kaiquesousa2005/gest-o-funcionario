@@ -8,6 +8,8 @@ import { AuthProvider } from './pages/AuthContext';
 import Component from './components/Component';
 import Header from './components/header';
 import ResumeLayout from './pages/Curriculo';
+import HistoricoAtualizacoes from './pages/Historico';
+
 
 function App() {
   return (
@@ -19,7 +21,7 @@ function App() {
           <Route path="/" element={<Login />} />
 
 
-          <Route path="/signup" element={<Signup />} /> 
+          <Route path="/signup" element={<Signup />} />
 
           <Route
             path="/formulario"
@@ -35,6 +37,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <ResumeLayout />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/historico"
+            element={
+              <ProtectedRoute>
+                <HistoricoAtualizacoes />
               </ProtectedRoute>
             }
           />

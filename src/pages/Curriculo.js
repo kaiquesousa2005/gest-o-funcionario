@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { collection, doc, updateDoc, deleteDoc, onSnapshot } from 'firebase/firestore';
-import { db } from '../firebaseConfig';
+import { collection, doc, updateDoc, deleteDoc, onSnapshot, addDoc, serverTimestamp, getDoc } from 'firebase/firestore';
+import { db, auth } from '../firebaseConfig';
 import { Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { ChevronDown, ChevronLeft } from 'lucide-react';
 import { Document, Page, Text, View, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
@@ -68,10 +68,37 @@ export default function ResumeLayout() {
     setOpenDialog(true);
   };
 
+  const registrarAtualizacao = async (tipo, detalhes) => {
+    try {
+      await addDoc(collection(db, 'historicoAtualizacoes'), {
+        tipo,
+        detalhes,
+        usuario: auth.currentUser.email,
+        timestamp: serverTimestamp()
+      });
+    } catch (error) {
+      console.error("Erro ao registrar atualização:", error);
+    }
+  };
+  
   const handleSave = async () => {
     if (editingUser) {
       try {
-        await updateDoc(doc(db, 'users', editingUser.id), editingUser);
+        const userRef = doc(db, 'users', editingUser.id);
+        const userSnapshot = await getDoc(userRef);  // Obter os dados atuais do usuário
+        const oldData = userSnapshot.data();  // Dados antigos
+  
+        // Comparar os dados antigos com os novos
+        let changeDetails = '';
+        for (const key in oldData) {
+          if (oldData[key] !== editingUser[key]) {
+            changeDetails += `${key}: de "${oldData[key]}" para "${editingUser[key]}", `;
+          }
+        }
+  
+        await updateDoc(userRef, editingUser);  // Atualizando os dados do usuário
+        await registrarAtualizacao('Atualização', changeDetails || `Currículo de ${editingUser.name} atualizado`);  // Registrando a atualização no histórico
+  
         setOpenDialog(false);
         setEditingUser(null);
       } catch (err) {
@@ -79,17 +106,27 @@ export default function ResumeLayout() {
       }
     }
   };
-
-  const handleDelete = async (userId, e) => {
-    e.stopPropagation();
+  
+  const handleDelete = async (userId, userName, e) => {
+    e.stopPropagation();  // Impede a propagação do evento, evitando problemas com outros handlers de click
+  
     if (window.confirm('Tem certeza que deseja excluir este usuário?')) {
       try {
-        await deleteDoc(doc(db, 'users', userId));
+        const userRef = doc(db, 'users', userId);
+        const userSnapshot = await getDoc(userRef);  // Obter os dados do usuário
+        const userData = userSnapshot.data();  // Dados completos do usuário
+  
+        await deleteDoc(userRef);  // Deletando o usuário
+  
+        // Registrando a exclusão no histórico
+        await registrarAtualizacao('Exclusão', `Currículo de ${userName} excluído. Dados: ${JSON.stringify(userData)}`);
+  
       } catch (err) {
-        setError('Erro ao excluir usuário: ' + err.message);
+        setError('Erro ao excluir usuário: ' + err.message);  // Tratando erro
       }
     }
   };
+  
 
   if (loading) return <CircularProgress className="loading" />;
   if (error) return <div className="text-error">Erro: {error}</div>;
@@ -157,13 +194,13 @@ export default function ResumeLayout() {
                     Editar
                   </Button>
                   <Button
-                    variant="contained"
-                    onClick={(e) => handleDelete(user.id, e)}
-                    className="MuiButton-contained"
-                    style={{ backgroundColor: '#EF4444' }}
-                  >
-                    Excluir
-                  </Button>
+  variant="contained"
+  onClick={(e) => handleDelete(user.id, user.name, e)}  // Passando o ID, nome e evento
+  className="MuiButton-contained"
+  style={{ backgroundColor: '#EF4444' }}
+>
+  Excluir
+</Button>
                   <PDFDownloadLink
                     document={<ResumePDF userData={user} />}
                     fileName={`curriculo_${user.name}.pdf`}
@@ -219,6 +256,13 @@ export default function ResumeLayout() {
   className="button-anterior"
 >
   Anterior
+</Button>
+<Button
+  variant="contained"
+  onClick={() => navigate('/historico')}
+  className="historico-button"
+>
+  Ver Histórico
 </Button>
 
       </div>
