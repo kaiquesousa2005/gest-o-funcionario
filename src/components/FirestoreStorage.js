@@ -11,16 +11,17 @@ export const uploadFileToStorage = async (file) => {
     throw new Error('Nenhum arquivo foi fornecido para upload');
   }
 
-  const userId = auth.currentUser?.uid;
-
-  if (!userId) {
+  const user = auth.currentUser;
+  if (!user) {
     throw new Error('Usuário não autenticado');
   }
 
   try {
-    const storageRef = ref(storage, `profileImages/${userId}/${file.name}`); // Caminho inclui o userId
-    await uploadBytes(storageRef, file);
-    const downloadURL = await getDownloadURL(storageRef);
+    const fileName = `${Date.now()}_${file.name}`; // Nome de arquivo único
+    const storageRef = ref(storage, `profileImages/${user.uid}/${fileName}`);
+    const snapshot = await uploadBytes(storageRef, file);
+    console.log('Upload bem-sucedido:', snapshot);
+    const downloadURL = await getDownloadURL(snapshot.ref);
     return downloadURL;
   } catch (error) {
     console.error('Erro ao fazer upload do arquivo:', error);

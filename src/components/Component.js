@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
 import { saveDataToFirestore, uploadFileToStorage } from './FirestoreStorage';
 import { UserRound, HelpCircle, ArrowUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +16,20 @@ export default function Component() {
   const [formErrors, setFormErrors] = useState({});
   const [file, setFile] = useState(null);
   const navigate = useNavigate(); 
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log('Usuário autenticado:', user.uid);
+      } else {
+        console.log('Usuário não autenticado');
+        // Opcionalmente, você pode redirecionar para a página de login aqui
+        // navigate('/login');
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
 
   const handlePhotoUpload = async (e) => {
@@ -50,10 +66,14 @@ export default function Component() {
       setFormErrors(errors);
     } else {
       try {
+        if (!auth.currentUser) {
+          throw new Error('Usuário não está autenticado');
+        }
+  
         if (!file) {
           throw new Error('Nenhum arquivo foi selecionado');
         }
-
+  
         const photoUrl = await uploadFileToStorage(file);
 
         await saveDataToFirestore({
